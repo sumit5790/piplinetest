@@ -20,7 +20,7 @@ pipeline {
       //  stage('Deliver') {
       //      steps {
        //         sh 'export JAVA=/opt/java && export PATH=${JAVA}/bin:${PATH}'
-                sh 'java -jar target/*.jar'
+        //        sh 'java -jar target/*.jar'
          //   }
         //}
     }
