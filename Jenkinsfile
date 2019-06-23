@@ -17,32 +17,14 @@ pipeline {
             }
             
         }
-      //  stage('Deliver') {
-      //      steps {
-       //         sh 'export JAVA=/opt/java && export PATH=${JAVA}/bin:${PATH}'
-        //        sh 'java -jar target/*.jar'
-         //   }
-        //}
+        stage('Deliver') {
+            steps {
+                sh 'export JAVA=/opt/java && export PATH=${JAVA}/bin:${PATH}'
+                sh 'java -jar target/*.jar'
+            }
+        }
     	
-	stage('four') {
-				               parallel{
-							         stage('unit test'){
-									              steps{
-												      echo 'running the unit test'
-												  }
-									 }
-									 stage('Integration test'){
-									        agent { dockerfile true }
-											
-											}
-											stage{
-											steps{
-											   sh 'docker images'
-									
-									}
-									}
-									 } 
-        }      									 
+	 
 	
 	}
 }
