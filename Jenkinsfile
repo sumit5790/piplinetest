@@ -23,9 +23,8 @@ pipeline {
         //        sh 'java -jar target/*.jar'
          //   }
         //}
-    }
-	
-	stage('four'){
+    	
+	stage('four') {
 				               parallel{
 							         stage('unit test'){
 									              steps{
@@ -43,6 +42,7 @@ pipeline {
 									}
 									}
 									 } 
-									 
-							   }
+        }      									 
+	
+	}
 }
