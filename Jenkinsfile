@@ -15,15 +15,12 @@ pipeline {
             steps {
                 sh 'mvn test'
             }
-            post {
-                always {
-                    junit 'target/surefire-reports/*.xml'
-                }
-            }
+            
         }
         stage('Deliver') {
             steps {
-                sh 'mvn -version'
+                sh 'export JAVA=/opt/java && export PATH=${JAVA}/bin:${PATH}'
+                sh 'java -jar target/*.jar'
             }
         }
     }
