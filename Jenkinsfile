@@ -18,7 +18,10 @@ pipeline {
 					    docker {
                                   image 'maven:slim'
                                  args '-v /root/.m2:/root/.m2'
-                         }
+                                    }
+					    steps{
+						  echo 'Running the integration test'
+					} 
 					 }
 				 
 				 }
