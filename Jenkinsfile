@@ -1,12 +1,29 @@
 pipeline {
-    agent {
-        docker {
-            image 'maven:slim'
-            args '-v /root/.m2:/root/.m2'
-        }
-    }
-    stages {
-        stage('Build') {
+      agent any  
+    
+ stages {
+ 
+        stage('build'){
+		    steps{
+			   script {
+			    docker_image=docker.build(jdk_images ,'-f ./dockerfile .')
+				}
+			}
+		}
+		
+		stage('test'){
+		       parallel {
+			     stage('maven'){
+				     agent{
+					    docker {
+                                  image 'maven:slim'
+                                 args '-v /root/.m2:/root/.m2'
+                         }
+					 }
+				 
+				 }
+				 
+				 stage('Build') {
             steps {
                 sh 'mvn -B -DskipTests clean package'
             }
@@ -23,8 +40,16 @@ pipeline {
                 sh 'java -jar target/*.jar'
             }
         }
-    	
-	 
+			   
+			   
+			   
+			   }
+		
+		
+		}
+ 
+ 
+ }
+
 	
-	}
-}
+ }
